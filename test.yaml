@@ -1,0 +1,12 @@
+---
+- name: Hello World Playbook
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    greeting: "Hello, World!"
+
+  tasks:
+    - name: Print Greeting
+      debug:
+        var: greeting
