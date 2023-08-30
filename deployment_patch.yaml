@@ -18,8 +18,8 @@
      kubernetes.core.k8s_json_patch:
         api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
         kind: Deployment
-        namespace: robot-shop
-        name: cart
+        name: "{{deployment_name}}"
+        namespace: "{{namespace}}"
         patch:
           - op: replace
             path: /spec/spec/containers/0/image
