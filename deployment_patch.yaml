@@ -7,16 +7,10 @@
    - name: Print the gateway for each host when defined
      ansible.builtin.debug:
        msg: Host api server {{host_api_server}} 
-   - name: Obtain access token
-     k8s_auth:
-       host: "{{host_api_server}}"
-       validate_certs: no
-       username: "{{username}}"
-       password: "{{password}}"
-     register: k8s_auth_results
    - name: Patch deployment
      kubernetes.core.k8s_json_patch:
-        api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+        api_version: apps/v1
+        api_key: "{{ apikey }}"
         kind: Deployment
         name: "{{deployment_name}}"
         namespace: "{{namespace}}"
