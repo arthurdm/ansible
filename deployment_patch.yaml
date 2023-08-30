@@ -23,4 +23,4 @@
         patch:
           - op: replace
             path: /spec/spec/containers/0/image
-            value: robotshop/rs-cart-wrong:latest
+            value: "{{image}}"
