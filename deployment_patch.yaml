@@ -8,13 +8,13 @@
      ansible.builtin.debug:
        msg: Host api server {{host_api_server}} 
    - name: Patch deployment
-     k8s_json_patch:
-        api_version: apps/v1
-        api_key: "{{ apikey }}"
-        kind: Deployment
-        name: "{{deployment_name}}"
-        namespace: "{{namespace}}"
-        patch:
-          - op: replace
-            path: /spec/spec/containers/0/image
-            value: "{{image}}"
+     kubernetes.core.k8s_json_patch:
+      api_version: apps/v1
+      api_key: "{{ apikey }}"
+      kind: Deployment
+      name: "{{deployment_name}}"
+      namespace: "{{namespace}}"
+      patch:
+        - op: replace
+          path: /spec/spec/containers/0/image
+          value: "{{image}}"
