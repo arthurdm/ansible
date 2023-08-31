@@ -13,10 +13,8 @@
       api_version: v1
       namespace: "{{namespace}}"
       kind: Pod
-      label_selectors:
-       - "{{k8s_pod_name}}"
+      name: "{{k8s_pod_name}}"
      register: pod_info
-
    - name: Display pod info
      debug:
       var: pod_info
