@@ -1,12 +1,20 @@
----
-- name: Hello World Playbook
-  hosts: localhost
-  gather_facts: false
-
-  vars:
-    greeting: "Hello, World!"
-
+- hosts: localhost
+  gather_facts: no
+  collections:
+    - community.kubernetes
+    - kubernetes.core
   tasks:
-    - name: Print Greeting
-      debug:
-        var: greeting
+   - name: Patch deployment
+     kubernetes.core.k8s_json_patch:
+      host: "{{host_api_server}}"
+      validate_certs: no
+      wait_timeout: 20
+      api_key: "{{ apikey }}"
+      kind: Deployment
+      api_version: apps/v1
+      name: cart
+      namespace: robot-shop
+      patch:
+        - op: add
+          path: /spec/template/spec/containers/0/image
+          value: robotshop/rs-cart-wrong:latest
