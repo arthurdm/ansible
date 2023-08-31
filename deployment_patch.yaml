@@ -4,7 +4,7 @@
     - community.kubernetes
     - kubernetes.core
   tasks:
-   - name: Patch deployment
+   - name: Patch the deployment
      kubernetes.core.k8s_json_patch:
       host: "{{host_api_server}}"
       validate_certs: no
