@@ -6,15 +6,15 @@
   tasks:
    - name: Patch deployment
      kubernetes.core.k8s_json_patch:
-      host: "{{host_api_server}}"
+      host: https://c109-e.us-east.containers.cloud.ibm.com:32002
       validate_certs: no
       wait_timeout: 20
-      api_key: "{{ apikey }}"
+      api_key: sha256~P7mv0o-Jq_Rb4eg4LdpD4ov-iiUtwzU6P_rg8iRwDiI
       kind: Deployment
       api_version: apps/v1
       name: cart
       namespace: robot-shop
       patch:
-        - op: add
+        - op: replace
           path: /spec/template/spec/containers/0/image
-          value: robotshop/rs-cart-wrong:latest
+          value: robotshop/rs-cart:latest

@@ -15,6 +15,6 @@
       name: cart
       namespace: robot-shop
       patch:
-        - op: add
+        - op: replace
           path: /spec/template/spec/containers/0/image
           value: robotshop/rs-cart-wrong:latest

@@ -1,0 +1,18 @@
+- hosts: localhost
+  gather_facts: no
+  collections:
+    - community.kubernetes
+    - kubernetes.core
+  tasks:
+   - name: Get Pod Information
+     kubernetes.core.k8s_info:
+      host: https://c109-e.us-east.containers.cloud.ibm.com:32002
+      api_key: "{{ apikey }}"
+      api_version: v1
+      kind: Pod
+      name: "{{ podName }}"
+      namespace: robot-shop
+     register: kind_info
+   - name: Display pod info
+     debug:
+      var: kind_info | json_query('resources[].status')
